@@ -1,23 +1,22 @@
-import React, {createContext, useState} from 'react'
-import { ApolloProvider } from '@apollo/client'
-import { useApollo } from 'apollo/client'
+import { ApolloProvider } from '@apollo/client';
+import { useApollo } from 'apollo/client';
+import React, { createContext, useState } from 'react';
 
-export const AppContext = createContext()
+export const AppContext = createContext();
 
-export const AppProvider = ({ children, ...rest }) => {
+export const AppProvider = ({ children }) => {
+  const apolloClient = useApollo();
 
-  const apolloClient = useApollo()
+  const [accessToken, setAccessToken] = useState();
+  const [alert, setAlert] = useState();
+  const [currentUser, setCurrentUser] = useState();
+  const [loading, setLoading] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
-  const [accessToken, setAccessToken] = useState()
-  const [alert, setAlert] = useState()
-  const [currentUser, setCurrentUser] = useState()
-  const [loading, setLoading] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+  const toggleMenu = () => setMenuOpen(!menuOpen);
 
-  const toggleMenu = () => setMenuOpen(!menuOpen)
-
-  const isLoading = () => setLoading(true)
-  const isLoaded = () => setLoading(false)
+  const isLoading = () => setLoading(true);
+  const isLoaded = () => setLoading(false);
 
   const initValue = {
     accessToken,
@@ -34,14 +33,12 @@ export const AppProvider = ({ children, ...rest }) => {
 
     menuOpen,
     setMenuOpen,
-    toggleMenu
-  }
+    toggleMenu,
+  };
 
-  return(
-    <AppContext.Provider value={ initValue }>
-      <ApolloProvider client={apolloClient}>
-        { children }
-      </ApolloProvider>
+  return (
+    <AppContext.Provider value={initValue}>
+      <ApolloProvider client={apolloClient}>{children}</ApolloProvider>
     </AppContext.Provider>
-  )
-}
+  );
+};

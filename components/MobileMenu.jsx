@@ -1,66 +1,49 @@
-import React, {useState} from 'react'
-import {
-  Box,
-  Divider,
-  IconButton,
-  List,
-  SwipeableDrawer,
-  Typography,
-  makeStyles
-} from '@material-ui/core'
-import {MenuItem} from 'components'
-import {MENU_ITEMS} from 'lib/constants'
+import { Box, List, makeStyles, SwipeableDrawer } from '@material-ui/core';
+import { MenuItem } from 'components';
+import { MENU_ITEMS } from 'lib/constants';
+import React from 'react';
 
-const drawerWidth = 240
-
-const MobileMenu = ({
-    open,
-    toggleMenu,
-    handleClick,
-  }) => {
-
-  const [openSettings, setOpenSettings] = useState(false)
-  const toggleSettingsMenu = () => setOpenSettings(!openSettings)
-
+const MobileMenu = ({ open, toggleMenu, handleClick }) => {
   const classes = useStyles();
 
-  return(
+  return (
     <SwipeableDrawer
-      open={ open }
+      open={open}
       variant="temporary"
-      anchor='right'
-      onOpen={ toggleMenu }
-      onClose={ toggleMenu }>
-        <Box
-          className={ classes.drawer }
-          display='flex'
-          justifyContent='space-between'
-          flexDirection='column'
-          height='100%'
-        >
-          <List className={ classes.list } component="nav">
-            { MENU_ITEMS.map(({value, label}, idx) => (
-              <MenuItem
-                key={idx}
-                value={value}
-                label={ label }
-                handleClick={ handleClick }
-              />
-            ))}
-          </List>
+      anchor="right"
+      onOpen={toggleMenu}
+      onClose={toggleMenu}
+    >
+      <Box
+        className={classes.drawer}
+        display="flex"
+        justifyContent="space-between"
+        flexDirection="column"
+        height="100%"
+      >
+        <List className={classes.list} component="nav">
+          {MENU_ITEMS.map(({ value, label }, idx) => (
+            <MenuItem
+              key={idx}
+              value={value}
+              label={label}
+              handleClick={handleClick}
+            />
+          ))}
+        </List>
       </Box>
     </SwipeableDrawer>
-  )
-}
+  );
+};
 
-export default MobileMenu
+export default MobileMenu;
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
-    width: '300px'
+    width: '300px',
   },
   list: {
-    height: '100%'
+    height: '100%',
   },
   item: {
     display: 'block',

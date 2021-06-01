@@ -1,0 +1,55 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "root": true,
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 7
+  },
+  "plugins": ["import", "jsx-a11y"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/recommended"
+  ],
+  "rules": {
+    "import/named": "off",
+    "no-restricted-imports": "error",
+    "complexity": ["error", 10],
+    "max-len": ["error", { "code": 120 }],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "off",
+    "new-parens": "error",
+    "arrow-parens": "error",
+    "comma-dangle": ["error", "always-multiline"],
+    "no-bitwise": "error",
+    "no-console": ["error", { "allow": ["warn", "error"] }],
+    "no-unused-vars": "error",
+    "sort-keys": "off",
+    "jsx-a11y/no-redundant-roles": "error",
+    "jsx-a11y/no-onchange": "error",
+    "prefer-arrow-callback": "warn",
+    "no-multiple-empty-lines": [2, { "max": 1 }],
+    "eqeqeq": "error",
+    "no-caller": "error",
+    "react/sort-prop-types": "off",
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off",
+    "import/no-unresolved": "off"
+  },
+  "globals": {
+    "process": true,
+    "console": true
+  }
+}

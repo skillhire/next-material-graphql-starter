@@ -1,89 +1,71 @@
-import { useContext } from 'react'
-import PropTypes from 'prop-types'
-import { useRouter } from 'next/router'
 import {
   AppBar,
-  Box,
   Button,
-  Hidden,
   IconButton,
+  makeStyles,
   Toolbar,
-  Typography,
-  makeStyles
-} from '@material-ui/core'
-import {
-  Menu
-} from '@material-ui/icons'
-import { AppContext } from 'context'
-import Logo from 'assets/logo.svg'
-import clsx from 'clsx'
-import { motion } from 'framer-motion'
-import { DesktopMenu, MobileMenu } from 'components'
-import { MENU_ITEMS } from 'lib/constants'
+} from '@material-ui/core';
+import { Menu } from '@material-ui/icons';
+import Logo from 'assets/logo.svg';
+import clsx from 'clsx';
+import { DesktopMenu, MobileMenu } from 'components';
+import { AppContext } from 'context';
+import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
+import { useContext } from 'react';
 
-const Header = ({ className, ...props }) => {
+const Header = ({ className }) => {
+  const router = useRouter();
+  const classes = useStyles();
 
-  const router = useRouter()
-  const classes = useStyles()
-
-  const {
-    menuOpen,
-    setMenuOpen,
-    toggleMenu
-  } = useContext(AppContext)
+  const { menuOpen, setMenuOpen, toggleMenu } = useContext(AppContext);
 
   const handleClick = (path) => {
-    setMenuOpen(false)
-    router.push(path)
-  }
+    setMenuOpen(false);
+    router.push(path);
+  };
 
-  const handleLogoClick = () => handleClick('/')
+  const handleLogoClick = () => handleClick('/');
 
-  return(
+  return (
     <div className={clsx(className, classes.root)}>
-      <AppBar color='inherit' position='fixed' elevation={0}>
+      <AppBar color="inherit" position="fixed" elevation={0}>
         <Toolbar>
-          <div className={ classes.container }>
-            <Button
-              onClick={ handleLogoClick }
-            >
-              <img
-                src={ Logo }
-                className={classes.logo}
-              />
+          <div className={classes.container}>
+            <Button onClick={handleLogoClick}>
+              <img src={Logo} className={classes.logo} alt="logo" />
             </Button>
           </div>
-          <div className={ classes.menu }>
-            <DesktopMenu
-              handleClick={ handleClick }
-            />
+          <div className={classes.menu}>
+            <DesktopMenu handleClick={handleClick} />
             <IconButton
-              color='primary'
-              onClick={ toggleMenu }
-              className={ classes.mobileMenuButton }>
+              color="primary"
+              onClick={toggleMenu}
+              className={classes.mobileMenuButton}
+            >
               <Menu />
             </IconButton>
           </div>
         </Toolbar>
       </AppBar>
       <MobileMenu
-        open={ menuOpen }
-        handleClick={ handleClick }
-        toggleMenu={ toggleMenu }
+        open={menuOpen}
+        handleClick={handleClick}
+        toggleMenu={toggleMenu}
       />
     </div>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
 
 Header.propTypes = {
-  className: PropTypes.string
-}
+  className: PropTypes.string,
+};
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   container: {
     flexGrow: 1,
@@ -94,14 +76,14 @@ const useStyles = makeStyles(theme => ({
   menu: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
   },
   menuItem: {
-    margin: theme.spacing(0, 1)
+    margin: theme.spacing(0, 1),
   },
   mobileMenuButton: {
     [theme.breakpoints.up('sm')]: {
-      display: 'none'
-    }
-  }
-}))
+      display: 'none',
+    },
+  },
+}));
