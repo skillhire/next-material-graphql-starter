@@ -1,13 +1,12 @@
-import React, { useState, useEffect } from 'react'
+import { useEffect } from 'react';
 
 // Helper hook to run a function on Enter key press
 const useEnterKey = (onEnter) => {
-
   const handleKeyPress = (ev) => {
-    if(ev.key === 'Enter'){
+    if (ev.key === 'Enter') {
       onEnter();
     }
-  }
+  };
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyPress);
@@ -16,7 +15,7 @@ const useEnterKey = (onEnter) => {
     };
   }, [handleKeyPress]);
 
-  return
-}
+  return;
+};
 
-export default useEnterKey
+export default useEnterKey;

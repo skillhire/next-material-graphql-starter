@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { ServerStyleSheets } from '@material-ui/core/styles';
@@ -10,7 +9,11 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <meta name="theme-color" content={theme.palette.primary.main} />
-          <link defer async rel="stylesheet"
+          <link
+            defer
+            async
+            rel="stylesheet"
+            // eslint-disable-next-line max-len
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Poppins:400,500,600,700,800&display=swap"
           />
         </Head>
@@ -22,7 +25,6 @@ export default class MyDocument extends Document {
     );
   }
 }
-
 
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with server-side generation (SSG).
@@ -63,6 +65,9 @@ MyDocument.getInitialProps = async (ctx) => {
   return {
     ...initialProps,
     // Styles fragment is rendered after the app and page rendering finish.
-    styles: [...React.Children.toArray(initialProps.styles), sheets.getStyleElement()],
+    styles: [
+      ...React.Children.toArray(initialProps.styles),
+      sheets.getStyleElement(),
+    ],
   };
 };

@@ -1,17 +1,12 @@
-import React, {useContext} from 'react'
-import {AppContext} from 'context'
+import { AppContext } from 'context';
+import { useContext } from 'react';
 
-const useLoaders = (props) => {
+const useLoaders = () => {
+  const { isLoading, isLoaded, setIsLoading, setIsLoaded } =
+    useContext(AppContext);
 
-  const {
-    isLoading,
-    isLoaded,
-    setIsLoading,
-    setIsLoaded
-  } = useContext(AppContext)
-
-  const showLoading = () => setIsLoading(true)
-  const hideLoading = () => setIsLoading(false)
+  const showLoading = () => setIsLoading(true);
+  const hideLoading = () => setIsLoading(false);
 
   return {
     isLoading,
@@ -19,8 +14,8 @@ const useLoaders = (props) => {
     setIsLoading,
     setIsLoaded,
     showLoading,
-    hideLoading
-  }
-}
+    hideLoading,
+  };
+};
 
-export default useLoaders
+export default useLoaders;

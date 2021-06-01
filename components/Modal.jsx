@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types'
 import {
   Box,
   Dialog,
@@ -7,9 +6,10 @@ import {
   DialogTitle,
   IconButton,
   makeStyles,
-  Typography
-} from '@material-ui/core'
-import { Close } from '@material-ui/icons'
+  Typography,
+} from '@material-ui/core';
+import { Close } from '@material-ui/icons';
+import PropTypes from 'prop-types';
 
 const Modal = ({
   open,
@@ -18,75 +18,57 @@ const Modal = ({
   subtitle,
   actions: buttons,
   children,
-  maxWidth='sm',
-  fullScreen
+  maxWidth = 'sm',
 }) => {
+  const classes = useStyles();
 
-  const classes = useStyles()
-
-  return(
+  return (
     <Dialog
-      className={ classes.dialog }
+      className={classes.dialog}
       fullWidth
-      maxWidth={ maxWidth }
-      open={ open }
-      onClose={ handleClose }>
-      <DialogTitle
-        className={ classes.title }
-        onClose={ handleClose }
-      >
-        <Box display='flex' justifyContent='space-between'>
-          <Box display='flex' flexDirection='row'>
-            <Typography variant="subtitle1">
-              { title }
-            </Typography>
+      maxWidth={maxWidth}
+      open={open}
+      onClose={handleClose}
+    >
+      <DialogTitle className={classes.title} onClose={handleClose}>
+        <Box display="flex" justifyContent="space-between">
+          <Box display="flex" flexDirection="row">
+            <Typography variant="subtitle1">{title}</Typography>
           </Box>
           <Box>
-            <IconButton
-              size='small'
-              onClick={ handleClose }>
+            <IconButton size="small" onClick={handleClose}>
               <Close />
             </IconButton>
           </Box>
         </Box>
       </DialogTitle>
       <DialogContent>
-        { subtitle &&
-          <Typography variant="body1">
-            { subtitle }
-          </Typography>
-        }
-        { children }
+        {subtitle && <Typography variant="body1">{subtitle}</Typography>}
+        {children}
       </DialogContent>
-      { buttons &&
-        <DialogActions>
-          { buttons }
-        </DialogActions>
-      }
+      {buttons && <DialogActions>{buttons}</DialogActions>}
     </Dialog>
-  )
-}
+  );
+};
 
 Modal.propTypes = {
   handleClose: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
   children: PropTypes.array,
-  buttons: PropTypes.array
-}
+  buttons: PropTypes.array,
+};
 
-export default Modal
+export default Modal;
 
-
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   title: {
     marginBottom: 10,
     height: 64,
     fontSize: '18px',
-    backgroundColor: theme.palette.background.primary
+    backgroundColor: theme.palette.background.primary,
   },
   dialog: {
-    zIndex: 1500
-  }
-}))
+    zIndex: 1500,
+  },
+}));
