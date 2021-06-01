@@ -13,7 +13,7 @@ export const HotelFragment = gql`
   }
 `;
 
-export const QUERY_HOTELS = gql`
+export const QUERY_SAMPLE = gql`
   query hotels {
     hotels {
       ...HotelFragment

@@ -1,6 +1,137 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
+
+This is a starter project that uses Next.js, Material UI and Apollo client for GraphQL as default settings. Out of the box
+this project is designed to setup the basic foundation for a modern website built using react.
+
+## GraphQL
+
+Before starting the project, ensure you have the appropriate GraphQL endpoint and access tokens configured in the apollo client
+which is in `apollo/client`. The default apollo client uses an endpoint from [GraphCMS](https://www.graphcms.com) but any
+GraphQL server will work. Define your GQL endpoint in the `.env.local` file:
+
+```
+NEXT_PUBLIC_GRAPHQL_URL=<GRAPHQL_URI_HERE>
+```
+
+Note that environment variables in Next.js must be appended with `NEXT_PUBLIC` for the client to access the variable.
+
+You can customize your Apollo client in the file
+
+```
+apollo/client.js
+```
+
+GraphQL queries and mutations are stored in the `graphql` folder and a sample query is available. You can access these
+queries and run them using Apollo client:
+
+```
+ import { useQuery } from '@apollo/client'
+ import { QUERY_SAMPLE } from 'graphql/sample'
+
+ ...
+
+ const { data, loading, error } = useQuery(QUERY_SAMPLE)
+```
+
+If you need to fetch the query at a later time you can also use `useLazyQuery` instead
+
+```
+const [{ data, loading, error }, querySample] = useQuery(QUERY_SAMPLE)
+const onClick = () => querySample()
+```
+
+If you need to issue a query with parameters, first ensure that your GraphQL query is setup to accept parameters then
+include them in your Apollo query
+
+```
+const [{ data, loading, error }, querySample] = useQuery(QUERY_SAMPLE)
+const onClick = () => querySample({ variables: {
+    sortBy: 'name',
+    sortDirection: 'desc'
+}})
+```
+
+
+## Material UI
+
+This projects incorporates the popular open-source react library Material UI. When using Material UI, it's important to
+use JSS as the default styling method since this is included as part of the Material UI library and works well with accessing
+the Material UI theme prop.
+
+When using Material UI, never define colors or styles directly, but try to define them in your themes config file and access
+them in JSS for any component by accessing the theme prop. For example:
+
+```
+const  useStyles = makeStyles(theme => ({
+  button: {
+    fontSize: 17,
+    backgroundColor: theme.palette.primary.main
+  }
+}))
+```
+
+Then in your component
+
+```
+const MyButton = ({ className, ...props }) => {
+
+  const classes = useStyles()
+
+  return (
+    <Button className={ classes.button } />
+  )
+}
+```
+
+If you need to combine styles or have styles that are conditional, use included `clsx` library. In the example above,
+you could combine the styles with the className variable injected into the component with:
+
+```
+<Button className={ clsx(className, classes.button) } />
+```
+
+Or you could add a style conditional on a value:
+
+```
+<Button className={ clsx(className, {
+    [classes.active]: active === true
+  })}
+>
+</div>
+```
+
+With JSS you can also access prop values to dynamically change CSS using values injected from the component:
+
+```
+const classes = useStyles({ height: 200 })
+
+const useStyles = makeStyles(theme => ({
+  container: {
+    height: props => props.height
+  }
+}))
+```
+
+For responsive designs, you should take advantage of the `Grid` component for responsive layouts, but if you need to
+create responsive designs for custom elements you can access the `theme.breakpoints` variable:
+
+```
+button: {
+  width: '100%',
+  maxWidth: 320px,
+  [theme.breakpoints.down('sm')]: {
+    maxWidth: '100%'
+  }
+}
+```
+
+## Next.js
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+
+## Run the development server
 
 First, run the development server:
 
