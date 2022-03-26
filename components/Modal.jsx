@@ -6,10 +6,10 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
-  makeStyles,
-  Typography
-} from '@material-ui/core'
-import { Close } from '@material-ui/icons'
+  Typography,
+} from '@mui/material';
+
+import { Close } from '@mui/icons-material'
 
 const Modal = ({
   open,
@@ -19,20 +19,17 @@ const Modal = ({
   actions: buttons,
   children,
   maxWidth='sm',
-  fullScreen
 }) => {
-
-  const classes = useStyles()
 
   return(
     <Dialog
-      className={ classes.dialog }
+      sx={ sx.dialog  }
       fullWidth
       maxWidth={ maxWidth }
       open={ open }
       onClose={ handleClose }>
       <DialogTitle
-        className={ classes.title }
+        sx={ sx.title  }
         onClose={ handleClose }
       >
         <Box display='flex' justifyContent='space-between'>
@@ -78,15 +75,14 @@ Modal.propTypes = {
 export default Modal
 
 
-
-const useStyles = makeStyles(theme => ({
+const sx = {
   title: {
-    marginBottom: 10,
+    marginBottom: '10px',
     height: 64,
     fontSize: '18px',
-    backgroundColor: theme.palette.background.primary
+    backgroundColor: 'background.primary'
   },
   dialog: {
-    zIndex: 1500
+    zIndex: theme => theme.zIndex.modal
   }
-}))
+}

@@ -1,34 +1,33 @@
-import PropTypes from 'prop-types'
-import {
-  makeStyles
-} from '@material-ui/core'
+import { Box } from '@mui/material'
 import { Footer } from 'components'
 
 export default function Layout({ children, ...props }) {
 
-  const classes = useStyles({ footerHeight: 80 })
-
+  const footerHeight = 80
+  
   return(
-    <div className={ classes.root }>
-      <div className={ classes.content }>
+    <Box sx={ sx.root  }>
+      <Box 
+        sx={{ 
+          minHeight: `calc(100vh - ${footerHeight}px)` 
+        }}>
         { children }
-      </div>
-      <div className={ classes.footer }>
+      </Box>
+      <Box sx={{ 
+          ...sx.footer,
+          height: footerHeight  
+        }}>
         <Footer />
-      </div>
-    </div>
+      </Box>
+    </Box>
   )
 }
 
-const useStyles = makeStyles(theme => ({
+const sx = {
   root: {
     height: '100%'
   },
-  content: {
-    minHeight: props => `calc(100vh - ${props.footerHeight}px)`
-  },
   footer: {
     width: '100%',
-    height: props => props.footerHeight
   }
-}))
+}

@@ -1,30 +1,23 @@
 import { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { useRouter } from 'next/router'
-import {
-  AppBar,
+import { 
+  AppBar, 
   Box,
-  Button,
-  Hidden,
-  IconButton,
-  Toolbar,
-  Typography,
-  makeStyles
-} from '@material-ui/core'
+  Button, 
+  IconButton, 
+  Toolbar 
+} from '@mui/material';
 import {
   Menu
-} from '@material-ui/icons'
+} from '@mui/icons-material'
 import { AppContext } from 'context'
 import Logo from 'assets/logo.svg'
-import clsx from 'clsx'
-import { motion } from 'framer-motion'
 import { DesktopMenu, MobileMenu } from 'components'
-import { MENU_ITEMS } from 'lib/constants'
 
-const Header = ({ className, ...props }) => {
+const Header = ({ styles, ...props }) => {
 
   const router = useRouter()
-  const classes = useStyles()
 
   const {
     menuOpen,
@@ -39,31 +32,36 @@ const Header = ({ className, ...props }) => {
 
   const handleLogoClick = () => handleClick('/')
 
-  return(
-    <div className={clsx(className, classes.root)}>
+  return (
+    <Box 
+      sx={{ 
+      ...sx.root, 
+      ...styles 
+      }}
+    >
       <AppBar color='inherit' position='fixed' elevation={0}>
         <Toolbar>
-          <div className={ classes.container }>
+          <Box sx={ sx.container  }>
             <Button
               onClick={ handleLogoClick }
             >
               <img
                 src={ Logo }
-                className={classes.logo}
+                style={ sx.logo }
               />
             </Button>
-          </div>
-          <div className={ classes.menu }>
+          </Box>
+          <Box sx={ sx.menu  }>
             <DesktopMenu
               handleClick={ handleClick }
             />
             <IconButton
               color='primary'
               onClick={ toggleMenu }
-              className={ classes.mobileMenuButton }>
+              size="large">
               <Menu />
             </IconButton>
-          </div>
+          </Box>
         </Toolbar>
       </AppBar>
       <MobileMenu
@@ -71,8 +69,8 @@ const Header = ({ className, ...props }) => {
         handleClick={ handleClick }
         toggleMenu={ toggleMenu }
       />
-    </div>
-  )
+    </Box>
+  );
 }
 
 export default Header
@@ -81,7 +79,7 @@ Header.propTypes = {
   className: PropTypes.string
 }
 
-const useStyles = makeStyles(theme => ({
+const sx = {
   root: {
     flexGrow: 1
   },
@@ -97,11 +95,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'flex-start'
   },
   menuItem: {
-    margin: theme.spacing(0, 1)
+    my: 0,
+    mx: 1    
   },
-  mobileMenuButton: {
-    [theme.breakpoints.up('sm')]: {
-      display: 'none'
-    }
-  }
-}))
+}

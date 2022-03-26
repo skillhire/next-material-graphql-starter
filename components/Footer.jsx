@@ -1,37 +1,22 @@
 import PropTypes from 'prop-types'
-import { Link as NextLink } from 'next/link'
-import {
-  Box,
-  Container,
-  Grid,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-  Link,
-  makeStyles
-} from '@material-ui/core'
-import clsx from 'clsx'
-import Logo from 'assets/logo.svg'
+import { Box, Container, Typography } from '@mui/material';
 import moment from 'moment'
 
 const Footer = ({
-    className,
+    styles,
     ...props
   }) => {
 
-  const classes = useStyles()
-
   return(
-    <div className={ clsx(className, classes.root) }>
+    <Box sx={{ ...sx.root, ...styles }}>
       <Container maxWidth='lg'>
-        <div className={ classes.container }>
+        <Box sx={ sx.container  }>
           <Typography variant='body2'>
             Copyright ® { moment().format('YYYY') }
           </Typography>
-        </div>
+        </Box>
       </Container>
-    </div>
+    </Box>
   )
 }
 
@@ -41,16 +26,21 @@ Footer.propTypes = {
 
 export default Footer
 
-const useStyles = makeStyles(theme => ({
+const sx = {
   root: {
-    padding: theme.spacing(4,2),
-    borderTop: `1px solid ${theme.palette.common.input}`,
-    backgroundColor: theme.palette.background.paper
-  },
-  container: {
+    width: '100%',
+    height: '100%',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    width: '100%'
+    alignItems: 'center',
+    borderTop: theme => `1px solid ${theme.palette.common.input}`,
+    backgroundColor: 'background.paper'
+  },
+  container: {    
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   }
-}))
+}

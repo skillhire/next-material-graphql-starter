@@ -1,21 +1,18 @@
 import React, {useContext} from 'react'
-import {
-  IconButton,
-  makeStyles,
-  Typography,
-  Slide,
-  Snackbar,
-  SnackbarContent
-} from '@material-ui/core'
+import { 
+  IconButton, 
+  Typography, 
+  Slide, 
+  Snackbar, 
+  SnackbarContent 
+} from '@mui/material';
 import {AppContext} from 'context'
-import {Close} from '@material-ui/icons'
+import {Close} from '@mui/icons-material'
 
 const TransitionDown = (props) =>
   <Slide {...props} direction="down" />
 
 const Alert = ({ ...props }) => {
-
-  const classes = useStyles()
 
   const {
     alert,
@@ -30,16 +27,18 @@ const Alert = ({ ...props }) => {
       onClose={handleClose}
       TransitionComponent={TransitionDown}
       autoHideDuration={2500}
-      className={ classes.snackbar }
+      sx={ sx.snackbar  }
       anchorOrigin={{
         vertical: 'top',
         horizontal: 'center',
       }}
     >
       <SnackbarContent
-        className={classes.alert}
+        sx={ sx.alert }
         message={
-          <Typography variant='subtitle2'>{ alert?.message }</Typography>
+          <Typography variant='subtitle2'>
+            { alert?.message }
+          </Typography>
         }
         action={
           <IconButton
@@ -58,12 +57,12 @@ const Alert = ({ ...props }) => {
 
 export default Alert
 
-const useStyles = makeStyles(theme => ({
+const sx = {
   alert: {
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.common.white
+    backgroundColor: 'primary.main',
+    color: 'common.white'
   },
   snackbar: {
     width: '100%'
   }
-}))
+}

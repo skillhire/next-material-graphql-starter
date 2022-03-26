@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
-import { ThemeProvider } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import {AppProvider} from 'context'
-import { Box } from '@material-ui/core'
 import { theme } from 'theme';
 import {
   Alert,
@@ -12,7 +11,7 @@ import {
   Layout
 } from 'components'
 
-export default function ShopJs({ Component, pageProps }) {
+export default function NextJs({ Component, pageProps }) {
 
   useEffect(() => {
     // Remove the server-side injected CSS.
@@ -28,21 +27,23 @@ export default function ShopJs({ Component, pageProps }) {
         <title>Next.js Starter App</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
-      <ThemeProvider theme={theme}>
-        <AppProvider>
-          <CssBaseline />
-          <Layout>
-            <Header />
-            <Alert />
-            <Component {...pageProps} />
-          </Layout>
-        </AppProvider>
-      </ThemeProvider>
+      <StyledEngineProvider injectFirst>
+        <ThemeProvider theme={theme}>
+          <AppProvider>
+            <CssBaseline />
+            <Layout>
+              <Header />
+              <Alert />
+              <Component {...pageProps} />
+            </Layout>
+          </AppProvider>
+        </ThemeProvider>
+      </StyledEngineProvider>
     </React.Fragment>
   );
 }
 
-ShopJs.propTypes = {
+NextJs.propTypes = {
   Component: PropTypes.elementType.isRequired,
   pageProps: PropTypes.object.isRequired,
 };

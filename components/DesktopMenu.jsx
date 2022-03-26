@@ -1,42 +1,38 @@
-import {
-  Button,
-  makeStyles
-} from '@material-ui/core'
-import clsx from 'clsx'
+import { Box, Button } from '@mui/material';
 import { MENU_ITEMS } from 'lib/constants'
 
 const DesktopMenu = ({
-    className,
+    styles,
     handleClick, 
     ...rest
   }) => {
 
-  const classes = useStyles()
-
   return(
-    <div className={ clsx(className, classes.root)}>
+    <Box sx={{ ...sx.root, ...styles }}>
       { MENU_ITEMS.map((item, i) => (
         <Button
           key={i}
-          className={ classes.menuItem }
+          sx={ sx.menuItem  }
           onClick={() => handleClick(item.value)}
         >
           { item.label }
         </Button>
       ))}
-    </div>
+    </Box>
   )
 }
 
 export default DesktopMenu
 
-const useStyles = makeStyles(theme => ({
+const sx = {
   root: {
-    [theme.breakpoints.down('xs')]: {
-      display: 'none'
+    display: {
+      xs: 'none',
+      sm: 'block',
     }
   },
   menuItem: {
-    padding: theme.spacing(1.5,3)
+    py: 1.5,
+    px: 3
   }
-}))
+}

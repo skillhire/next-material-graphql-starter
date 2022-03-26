@@ -3,8 +3,8 @@ import {
   useEffect,
   useLayoutEffect
 } from 'react'
-import { useTheme } from '@material-ui/core/styles'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
+import { useTheme } from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
 
 const BREAKPOINTS = {
   "xs": 0,
@@ -20,9 +20,9 @@ const useResponsive = ({ ...props }) => {
 
   const [breakpoint, setBreakpoint] = useState('lg')
 
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
-  const isTablet = useMediaQuery(theme.breakpoints.between('sm','md'))
-  const isDesktop = useMediaQuery(theme.breakpoints.between('md', 'lg'))
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm','lg'))
+  const isDesktop = useMediaQuery(theme.breakpoints.between('md', 'xl'))
   const isSuperLargeDesktop = useMediaQuery(theme.breakpoints.up('lg'));
 
   useEffect(() => {

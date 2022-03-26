@@ -1,16 +1,8 @@
 import React, {useState} from 'react'
-import {
-  Box,
-  IconButton,
-  Button,
-  List,
-  Container,
-  SwipeableDrawer,
-  Typography,
-  makeStyles
-} from '@material-ui/core'
+import { Box, IconButton, Button, List, Container, SwipeableDrawer, Typography } from '@mui/material';
+
 import { Panel } from 'components'
-import {ArrowBack, Clear, Close} from '@material-ui/icons'
+import {ArrowBack, Clear, Close} from '@mui/icons-material'
 
 const Drawer = ({
     open,
@@ -26,60 +18,64 @@ const Drawer = ({
 
   const classes = useStyles({ width })
 
-  return(
-      <SwipeableDrawer
-        open={ open }
-        variant="temporary"
-        anchor={anchor}
-        onOpen={ handleClose }
-        onClose={ handleClose }
-        classes={{ paper: classes.paper }}
-      >
-        <Box p={2}className={classes.container}>
-          <Box display='flex' justifyContent='space-between' width='100%'>
-            <Box display='flex' flexGrow={1}>
-              <IconButton onClick={ handleClose }>
-                <ArrowBack />
-              </IconButton>
-            </Box>
-            <Box display='flex' flexGrow={2}>
-              <Typography variant='subtitle1' className={ classes.title }>
-                { title }
-              </Typography>
-            </Box>
+  return (
+    <SwipeableDrawer
+      open={ open }
+      variant="temporary"
+      anchor={anchor}
+      onOpen={ handleClose }
+      onClose={ handleClose }
+      PaperProps={{ 
+        sx: sx.paper 
+      }}
+    >
+      <Box p={2}sx={{ 
+          ...sx.container,
+          maxWidth: width, 
+        }}>
+        <Box display='flex' justifyContent='space-between' width='100%'>
+          <Box display='flex' flexGrow={1}>
+            <IconButton onClick={ handleClose } size="large">
+              <ArrowBack />
+            </IconButton>
           </Box>
-          <Box py={2}>
-            { children }
+          <Box display='flex' flexGrow={2}>
+            <Typography variant='subtitle1' sx={ sx.title  }>
+              { title }
+            </Typography>
           </Box>
-          { actions &&
-            <Box>
-              { actions }
-            </Box>
-          }
         </Box>
-      </SwipeableDrawer>
-    )
+        <Box py={2}>
+          { children }
+        </Box>
+        { actions &&
+          <Box>
+            { actions }
+          </Box>
+        }
+      </Box>
+    </SwipeableDrawer>
+  );
 }
 
 export default Drawer
 
-const useStyles = makeStyles(theme => ({
+const sx = {
   drawer: {
   },
   paper: {
     zIndex: `90 !important`,
-    backgroundColor: theme.palette.common.white
+    backgroundColor: 'common.white'
   },
   title: {
-    marginTop: theme.spacing(1)
+    mt: 1
   },
   container: {
     zIndex: `90 !important`,
     width: '100%',
-    width: 440,
-    maxWidth: props => props.width,
-    [theme.breakpoints.down("sm")]: {
-      width: '100vw',
+    width: {
+      sm: 440,
+      xs: '100vw'
     }
   }
-}))
+}
