@@ -1,13 +1,13 @@
 import breakpoints from 'theme/breakpoints'
-import overrides from 'theme/overrides';
+import components from 'theme/components';
 import palette from 'theme/palette'
 import typography from 'theme/typography'
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@mui/material/styles';
 
-export const theme = createMuiTheme({
+export const theme = createTheme({
   breakpoints,
   palette,
-  overrides,
+  components,
   typography,
   props: {
     MuiButtonBase: {

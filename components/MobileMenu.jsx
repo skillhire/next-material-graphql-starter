@@ -1,17 +1,11 @@
 import React, {useState} from 'react'
-import {
-  Box,
-  Divider,
-  IconButton,
-  List,
-  SwipeableDrawer,
-  Typography,
-  makeStyles
-} from '@material-ui/core'
+import { 
+  Box, 
+  List, 
+  SwipeableDrawer, 
+} from '@mui/material';
 import {MenuItem} from 'components'
 import {MENU_ITEMS} from 'lib/constants'
-
-const drawerWidth = 240
 
 const MobileMenu = ({
     open,
@@ -20,9 +14,6 @@ const MobileMenu = ({
   }) => {
 
   const [openSettings, setOpenSettings] = useState(false)
-  const toggleSettingsMenu = () => setOpenSettings(!openSettings)
-
-  const classes = useStyles();
 
   return(
     <SwipeableDrawer
@@ -32,13 +23,13 @@ const MobileMenu = ({
       onOpen={ toggleMenu }
       onClose={ toggleMenu }>
         <Box
-          className={ classes.drawer }
+          sx={ sx.drawer  }
           display='flex'
           justifyContent='space-between'
           flexDirection='column'
           height='100%'
         >
-          <List className={ classes.list } component="nav">
+          <List sx={ sx.list  } component="nav">
             { MENU_ITEMS.map(({value, label}, idx) => (
               <MenuItem
                 key={idx}
@@ -55,7 +46,7 @@ const MobileMenu = ({
 
 export default MobileMenu
 
-const useStyles = makeStyles((theme) => ({
+const sx = {
   drawer: {
     width: '300px'
   },
@@ -64,8 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
   item: {
     display: 'block',
-    paddingTop: 0,
-    paddingBottom: 0,
-    fontWeight: theme.typography.fontWeightMedium,
+    py: 0,    
+    fontWeight: theme => theme.typography.fontWeightMedium,
   },
-}));
+};

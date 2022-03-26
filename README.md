@@ -66,9 +66,9 @@ them in JSS for any component by accessing the theme prop. For example:
 const  useStyles = makeStyles(theme => ({
   button: {
     fontSize: 17,
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: 'primary.main'
   }
-}))
+}
 ```
 
 Then in your component
@@ -76,10 +76,10 @@ Then in your component
 ```
 const MyButton = ({ className, ...props }) => {
 
-  const classes = useStyles()
+
 
   return (
-    <Button className={ classes.button } />
+    <Button sx={ sx.button  } />
   )
 }
 ```
@@ -88,17 +88,17 @@ If you need to combine styles or have styles that are conditional, use included 
 you could combine the styles with the className variable injected into the component with:
 
 ```
-<Button className={ clsx(className, classes.button) } />
+<Button sx={ clsx(className, sx.button) } />
 ```
 
 Or you could add a style conditional on a value:
 
 ```
-<Button className={ clsx(className, {
-    [classes.active]: active === true
+<Button sx={ clsx(className, {
+    [sx.active]: active === true
   })}
 >
-</div>
+</Box>
 ```
 
 With JSS you can also access prop values to dynamically change CSS using values injected from the component:
@@ -106,11 +106,11 @@ With JSS you can also access prop values to dynamically change CSS using values 
 ```
 const classes = useStyles({ height: 200 })
 
-const useStyles = makeStyles(theme => ({
+const sx = {
   container: {
     height: props => props.height
   }
-}))
+}
 ```
 
 For responsive designs, you should take advantage of the `Grid` component for responsive layouts, but if you need to
